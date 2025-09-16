@@ -91,8 +91,8 @@ void Dictionary::filter(const std::string &begin, const std::string &end, const 
             }
         }
         if (!ops.length) {
-            if (len != startLen) {
-                keep = false;
+            if (len == startLen) {
+                keep = true;
             }
         }
         if (w == begin || w == end) {
