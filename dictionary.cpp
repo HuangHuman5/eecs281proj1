@@ -19,7 +19,7 @@ void Dictionary::addWord(const string &w) {
 void Dictionary::getwords() {
     wordlist.clear();
     index.clear();
-
+    
     string lineinput;
     if (!(std::cin >> lineinput)) 
         throw std::runtime_error("No input");
@@ -41,7 +41,8 @@ void Dictionary::getwords() {
     }
     if (N < 0) 
         throw std::runtime_error("Negative N");
-
+    index.reserve(N);
+    wordlist.reserve(N);
     string line;
     int count = 0;
     while (count < N && std::cin >> line) {
