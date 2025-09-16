@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include "changes.h"
 
 class Dictionary {
 private:
@@ -27,6 +28,8 @@ public:
     size_t indexOf(const std::string &w) const;
 
     bool contains(const std::string &w, size_t &outIdx) const;
+    
+    void filter(const std::string &begin, const std::string &end, const modtype &ops) ;
 };
 
 #endif // LETTERMAN_DICTIONARY_H

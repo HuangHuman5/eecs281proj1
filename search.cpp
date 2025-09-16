@@ -29,7 +29,7 @@ SearchResult search(const Dictionary &dict, size_t begin, size_t end, Strategy s
     size_t discoveredCount = 1;
     bool found = false;
 
-    while (!sc.empty()) {
+    while (!sc.empty() && !found) {
         size_t pos;
         if (strat == Strategy::Queue) {
             pos = sc.front();
@@ -61,10 +61,6 @@ SearchResult search(const Dictionary &dict, size_t begin, size_t end, Strategy s
                 }
             }
         }
-       
-        if (found) 
-            break;
-
     }
 
     SearchResult res;

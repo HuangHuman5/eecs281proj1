@@ -45,13 +45,13 @@ void Dictionary::getwords() {
     string line;
     int count = 0;
     while (count < N && std::cin >> line) {
-        if (line.rfind("//", 0) == 0) {
+        if (line.find("//") == 0) {
             std::getline(std::cin, line);
             continue;
         }
         line = shorten(line);
         if (line.empty()) 
-            continue;
+            return;
         if (lineinput == "S") {
             if (!isWord(line)) 
                 throw std::runtime_error("Not in simple dictionary");
@@ -68,6 +68,37 @@ void Dictionary::getwords() {
         }
         count++;
     }
+}
+
+void Dictionary::filter(const std::string &begin, const std::string &end, const modtype &ops) {
+    std::vector<std::string> newList;
+    std::unordered_map<std::string, size_t> newIndex;
+
+    size_t startLen = begin.size();
+
+    for (const auto &w : wordlist) {
+        size_t len = w.size();
+        bool keep = false;
+        if (ops.change || ops.swap) {
+            if (len == startLen) {
+                keep = true;
+            }
+        }
+        if (ops.length) {
+            if (len + 1 == startLen || len == startLen + 1) {
+                keep = true;
+            }
+        }
+        if (w == begin || w == end) {
+            keep = true;
+        }
+        if (keep) {
+            newIndex[w] = newList.size();
+            newList.push_back(w);
+        }
+    }
+    wordlist.swap(newList);
+    index.swap(newIndex);
 }
 
 size_t Dictionary::indexOf(const std::string &w) const {

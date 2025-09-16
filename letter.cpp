@@ -95,6 +95,8 @@ int main(int argc, char **argv) {
         die(string("Invalid dictionary: ") + ex.what()); 
     }
 
+    dict.filter(beginWord, endWord, ops);
+
     size_t startIdx, endIdx;
     try {
         startIdx = dict.indexOf(beginWord);
