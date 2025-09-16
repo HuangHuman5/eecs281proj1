@@ -79,14 +79,20 @@ void Dictionary::filter(const std::string &begin, const std::string &end, const 
     for (const auto &w : wordlist) {
         size_t len = w.size();
         bool keep = false;
-        if (ops.change || ops.swap) {
+        if (ops.swap && !ops.change && !ops.length) {
             if (len == startLen) {
                 keep = true;
+                for(const char &c: w) {
+                if(begin.find(c) != std::string::npos) {
+                    keep = false;
+                    break;
+                }
+            }
             }
         }
-        if (ops.length) {
-            if (len + 1 == startLen || len == startLen + 1) {
-                keep = true;
+        if (!ops.length) {
+            if (len != startLen) {
+                keep = false;
             }
         }
         if (w == begin || w == end) {
