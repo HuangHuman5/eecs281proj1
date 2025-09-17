@@ -15,7 +15,7 @@ private:
     void addWord(const std::string &w);
 
 public:
-    void getwords();
+    void getwords(const std::string &begin, const std::string &end, const modtype &ops);
 
     const std::vector<std::string>& words() const {
         return wordlist;

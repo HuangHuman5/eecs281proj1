@@ -16,7 +16,7 @@ void Dictionary::addWord(const string &w) {
     }
 }
 
-void Dictionary::getwords() {
+void Dictionary::getwords(const std::string &begin, const std::string &end, const modtype &ops) {
     wordlist.clear();
     index.clear();
     
@@ -41,6 +41,10 @@ void Dictionary::getwords() {
     }
     if (N < 0) 
         throw std::runtime_error("Negative N");
+    if (lineinput == "S") {
+        index.reserve(N);
+        wordlist.reserve(N);
+    }
     string line;
     int count = 0;
     while (count < N && std::cin >> line) {
@@ -54,6 +58,8 @@ void Dictionary::getwords() {
         if (lineinput == "S") {
             if (!isWord(line)) 
                 throw std::runtime_error("Not in simple dictionary");
+            if(!ops.length && line.size() != begin.size() && line.size() != end.size())
+                continue;
             addWord(line);
         }
         else {
@@ -69,42 +75,6 @@ void Dictionary::getwords() {
     }
 }
 
-void Dictionary::filter(const std::string &begin, const std::string &end, const modtype &ops) {
-    std::vector<std::string> newList;
-    std::unordered_map<std::string, size_t> newIndex;
-
-    size_t startLen = begin.size();
-
-    for (const auto &w : wordlist) {
-        size_t len = w.size();
-        bool keep = false;
-        if (ops.swap && !ops.change && !ops.length) {
-            if (len == startLen) {
-                keep = true;
-                for(const char &c: w) {
-                    if(begin.find(c) == std::string::npos) {
-                        keep = false;
-                        break;
-                    }
-                }
-            }
-        }
-        if (!ops.length) {
-            if (len == startLen) {
-                keep = true;
-            }
-        }
-        if (w == begin || w == end) {
-            keep = true;
-        }
-        if (keep) {
-            newIndex[w] = newList.size();
-            newList.push_back(w);
-        }
-    }
-    wordlist.swap(newList);
-    index.swap(newIndex);
-}
 
 size_t Dictionary::indexOf(const std::string &w) const {
     auto it = index.find(w);

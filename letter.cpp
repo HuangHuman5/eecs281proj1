@@ -89,13 +89,11 @@ int main(int argc, char **argv) {
 
     Dictionary dict;
     try { 
-        dict.getwords(); 
+        dict.getwords(beginWord, endWord, ops); 
     }
     catch (const std::exception &ex) {
         die(string("Invalid dictionary: ") + ex.what()); 
     }
-
-    dict.filter(beginWord, endWord, ops);
 
     size_t startIdx, endIdx;
     try {
