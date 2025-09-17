@@ -1,5 +1,5 @@
 C
-19
+17
 ch[io]p
 junk
 st!ar
@@ -7,13 +7,11 @@ sh[io]p
 shot
 stop&
 le?t
-leet
 pats
 bots
 mis?is?ip?i
 [jbcf]ar
 bar![tk]&
-bark
 racecar
 stab&
 racer

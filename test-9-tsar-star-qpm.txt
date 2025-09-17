@@ -1,5 +1,5 @@
 C
-19
+16
 ch[io]p
 junk
 st!ar
@@ -7,9 +7,6 @@ sh[io]p
 shot
 stop&
 le?t
-leet
-star
-tsar
 mis?is?ip?i
 [jbcf]ar
 bar![tk]&

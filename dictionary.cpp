@@ -68,6 +68,8 @@ void Dictionary::getwords(const std::string &begin, const std::string &end, cons
             for (auto &w : out) {
                 if (!isWord(w)) 
                     throw std::runtime_error("Not in complex dictionary");
+                if(!ops.length && line.size() != begin.size() && line.size() != end.size())
+                    continue;
                 addWord(w);
             }
         }
