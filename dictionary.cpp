@@ -41,8 +41,6 @@ void Dictionary::getwords() {
     }
     if (N < 0) 
         throw std::runtime_error("Negative N");
-    index.reserve(N);
-    wordlist.reserve(N);
     string line;
     int count = 0;
     while (count < N && std::cin >> line) {
@@ -84,11 +82,11 @@ void Dictionary::filter(const std::string &begin, const std::string &end, const 
             if (len == startLen) {
                 keep = true;
                 for(const char &c: w) {
-                if(begin.find(c) != std::string::npos) {
-                    keep = false;
-                    break;
+                    if(begin.find(c) == std::string::npos) {
+                        keep = false;
+                        break;
+                    }
                 }
-            }
             }
         }
         if (!ops.length) {
